@@ -40,6 +40,14 @@ Rails.application.routes.draw do
         end
       end
 
+      %i{ merchants customers items invoices invoice_items transactions}.each do |model|
+        namespace model do
+          get :find, to: "search#show"
+          get :find_all, to: "search#index"
+          get :random, to: "random#show"
+        end
+      end
+
     end
   end
 end
