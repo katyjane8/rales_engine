@@ -1,16 +1,20 @@
+require 'database_cleaner'
 require 'csv'
 
 module Seeder
   class << self
 
     def seed_all
+      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.clean
       all_tables.each { |table| seed(table) }
     end
 
     def seed(table)
       options = { headers: true }
+      current_model = model(table)
       CSV.foreach(path(table), options) do |row|
-        model(table).insert(row.to_hash)
+        record = current_model.new(row.to_hash)
       end
     end
 
@@ -23,7 +27,7 @@ module Seeder
     end
 
     def all_tables
-      %i{merchants items invoices invoice_items customers transactions}
+      %i{merchants customers items invoices invoice_items transactions}
     end
 
   end
