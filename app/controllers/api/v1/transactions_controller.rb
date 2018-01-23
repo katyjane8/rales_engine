@@ -20,7 +20,11 @@ class Api::V1::TransactionsController < ApplicationController
 private
 
   def transaction_params
-    params.require(:ransaction).permit(:name)
+    params.require(:ransaction).permit(
+      :credit_card_number,
+      :credit_card_expiration_date,
+      :result
+    )
   end
 
 end
