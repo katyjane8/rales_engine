@@ -2,6 +2,14 @@ Rails.application.routes.draw do
   namespace :api, except: [:new, :edit] do
     namespace :v1 do
 
+      %i{ merchants customers items invoices invoice_items transactions}.each do |model|
+        namespace model do
+          get :find, to: "search#show"
+          get :find_all, to: "search#index"
+          get :random, to: "random#show"
+        end
+      end
+
       resources :merchants do
         scope module: :merchants do
           resources :items, :invoices, only: :index
@@ -37,14 +45,6 @@ Rails.application.routes.draw do
       resources :customers do
         scope module: :customers do
           resources :invoices, :transactions, only: :index
-        end
-      end
-
-      %i{ merchants customers items invoices invoice_items transactions}.each do |model|
-        namespace model do
-          get :find, to: "search#show"
-          get :find_all, to: "search#index"
-          get :random, to: "random#show"
         end
       end
 
