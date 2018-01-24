@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  namespace :api, except: [:new, :edit] do
-    namespace :v1 do
+  namespace :api, except: [:new, :edit], as: nil do
+    namespace :v1, as: nil do
 
       %i{ merchants customers items invoices invoice_items transactions}.each do |model|
         namespace model do
@@ -10,9 +10,24 @@ Rails.application.routes.draw do
         end
       end
 
+      namespace :merchants do
+        get :most_items, to: 'most_items#index'
+        get :most_revenue, to: 'most_revenue#index'
+      end
+
+      namespace :items do
+        get :most_items, to: 'most_items#index'
+        get :most_revenue, to: 'most_revenue#index'
+      end
+
       resources :merchants do
         scope module: :merchants do
           resources :items, :invoices, only: :index
+          get :revenue, to: 'revenue#show'
+          get :customers_with_pending_invoices,
+            to: 'customers_with_pending_invoices#index'
+          get :favorite_customer, to: 'favorite_customer#show'
+
         end
       end
 
@@ -33,6 +48,7 @@ Rails.application.routes.draw do
         scope module: :items do
           resource :merchant, only: :show
           resources :invoice_items, only: :index
+          get :best_day, to: 'best_day#show'
         end
       end
 
@@ -45,6 +61,7 @@ Rails.application.routes.draw do
       resources :customers do
         scope module: :customers do
           resources :invoices, :transactions, only: :index
+          get :favorite_merchant, to: 'favorite_merchant#show'
         end
       end
 
