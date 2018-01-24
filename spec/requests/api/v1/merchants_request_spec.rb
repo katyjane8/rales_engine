@@ -16,14 +16,14 @@ describe "Merchants API" do
   end
 
   it "can get one merchant by its id" do
-    id = create(:merchant).id
+    x = create(:merchant)
 
-    get "/api/v1/merchants/#{id}"
+    get "/api/v1/merchants/#{x.id}"
 
     merchant = JSON.parse(response.body)
 
     expect(response).to be_successful
-    expect(merchant["id"]).to eq(id)
+    expect(merchant["id"]).to eq(x.id)
   end
 
   it "can find one merchant by id params" do
@@ -124,7 +124,7 @@ describe "Merchants API" do
 
   # it "can find a random merchant" do
   #   get "api/v1/merchants/random.json"
-  # 
+  #
   #   expect(response).to be_successful
   #
   #   # merchant = JSON.parse(response.body)
