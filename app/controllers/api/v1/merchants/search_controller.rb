@@ -1,5 +1,5 @@
 class Api::V1::Merchants::SearchController < ApplicationController
-  
+
   def index
     render json: Merchant.where(search_params)
   end
@@ -11,7 +11,7 @@ class Api::V1::Merchants::SearchController < ApplicationController
 private
 
   def search_params
-    params.permit(:id, :name, :created_at, :updated_at)
+    params.permit(Merchant.attribute_names)
   end
-  
+
 end
