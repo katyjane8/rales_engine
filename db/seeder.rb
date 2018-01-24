@@ -14,7 +14,7 @@ module Seeder
       options = { headers: true }
       current_model = model(table)
       CSV.foreach(path(table), options) do |row|
-        record = current_model.new(row.to_hash)
+        record = current_model.create!(row.to_hash)
       end
     end
 
