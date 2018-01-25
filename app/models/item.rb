@@ -8,8 +8,8 @@ class Item < ApplicationRecord
     invoice_items.joins(invoice: :transactions).merge(Transaction.unscoped.success).group(:id).order("invoice_items.quantity DESC").first.invoice.created_at
   end
 
-  def self.most_items
-    select("items.*, sum(invoice_items.quantity) AS items_sold").joins(invoices: :transactions).merge(Transaction.unscoped.success).group(:id).order("items_sold DESC").limit(5)
+  def self.most_items(x)
+    select("items.*, sum(invoice_items.quantity) AS items_sold").joins(invoices: :transactions).merge(Transaction.unscoped.success).group(:id).order("items_sold DESC").limit(x)
   end
   def self.most_revenue(top_x)
     select('items.*,
