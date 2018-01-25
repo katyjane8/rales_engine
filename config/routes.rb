@@ -45,14 +45,14 @@ Rails.application.routes.draw do
       end
 
       %i{
-        merchant
-        customer
-        invoice
-        item
-        invoice_item
-        transaction
+        merchants
+        customers
+        invoices
+        items
+        invoice_items
+        transactions
       }.each do |model|
-        record_of model do
+        collection_of model do
           get :find, to: "search#show"
           get :find_all, to: "search#index"
           shows :random
