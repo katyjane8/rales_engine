@@ -21,4 +21,40 @@ class Customer < ApplicationRecord
     ).first
   end
 
+  def self.with_pending_invoices_for_merchant(id)
+    find_by_sql "
+      SELECT
+        customers.*,
+        count(invoices) as ordered,
+        count(success) as paid
+      FROM
+        customers
+      INNER JOIN
+        invoices
+        ON
+        invoices.customer_id = customers.id
+        AND
+        invoices.merchant_id = #{id}
+      LEFT OUTER JOIN
+        transactions success
+        ON
+        success.invoice_id = invoices.id
+        AND
+        success.result = 'success'
+      LEFT OUTER JOIN
+        transactions failed
+        ON
+        failed.invoice_id = invoices.id
+        AND
+        failed.result = 'failed'
+      GROUP BY
+        customers.id
+      HAVING
+        count(invoices) > count(success)
+        AND
+        count(failed) > 0
+      ;
+    "
+  end
+
 end
