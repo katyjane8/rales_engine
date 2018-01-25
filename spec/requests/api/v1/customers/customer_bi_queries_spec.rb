@@ -33,7 +33,7 @@ describe "Customers BI endpoints API" do
     expect(response).to be_successful
 
     merch = JSON.parse(response.body)
-
+    
     expect(merch["id"]).to eq(@merchant1.id)
   end
 end
