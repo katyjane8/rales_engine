@@ -7,4 +7,18 @@ class Customer < ApplicationRecord
   def favorite_merchant
     merchants.select("merchants.*, count(transactions) AS total").joins(invoices: [:transactions]).merge(Transaction.unscoped.success).group(:id).order("total DESC").first
   end
+
+  def self.favorite_for_merchant(id)
+    joins(
+      invoices: :transactions
+    ).where(
+      invoices: { merchant_id: id },
+      transactions: { result: :success }
+    ).group(
+      :id
+    ).order(
+      'count(transactions.id) DESC'
+    ).first
+  end
+
 end
