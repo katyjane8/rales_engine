@@ -33,8 +33,8 @@ describe "Items BI endpoints API" do
     expect(response).to be_successful
 
     item = JSON.parse(response.body)
-
-    expect(item).to eq("2018-01-23T17:37:07.000Z")
+    byebug
+    expect(item["best_day"]).to eq("2018-01-23T17:37:07.000Z")
   end
 
   it "returns the top item instances ranked by total number sold" do
