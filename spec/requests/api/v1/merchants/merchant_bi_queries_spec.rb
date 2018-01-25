@@ -45,13 +45,13 @@ describe "Merchants BI endpoints API" do
   end
 
   it "returns the top merchants ranked by total number of items sold" do
-    get "/api/v1/merchants/most_items?quantity=4"
+    get "/api/v1/merchants/most_items?quantity=2"
 
     expect(response).to be_successful
 
     merch = JSON.parse(response.body)
 
-    expect(merch.count).to eq(3)
+    expect(merch.count).to eq(2)
     expect(merch.first["id"]).to eq(@merchant1.id)
   end
 end
