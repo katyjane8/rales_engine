@@ -20,13 +20,13 @@ Rails.application.routes.draw do
         indexes :most_items, :most_revenue
       end
 
-      record_of :items do
+      record_of :item do
         belongs_to :merchant
         has_many :invoice_items
         shows :best_day
       end
 
-      record_of :invoices do
+      record_of :invoice do
         belongs_to :customer, :merchant
         has_many :transactions, :items, :invoice_items
       end
