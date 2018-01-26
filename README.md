@@ -17,9 +17,9 @@ Run:
 ```rails s```
 7. Run ```rails c``` and check for ```Invoice.all``` to make sure your data has loaded
 
-##Developers
+## Developers
 [Josi McClellan](https://github.com/JosiMcClellan)
 [Katy Welyczko](https://github.com/katyjane8)
 
-##Acknowledgments
+## Acknowledgments
 The project and guidelines were developed by the Turing School of Software and Design: http://backend.turing.io/module3/projects/rails_engine
