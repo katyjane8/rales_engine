@@ -8,7 +8,7 @@ class ApplicationController < ActionController::API
   end
 
   def in_cents(dollars)
-    (dollars.to_f * 100).to_i
+    (dollars.to_f * 100).round
   end
 
   def in_dollars(cents)

@@ -5,7 +5,7 @@ class Api::V1::Items::SearchController < SearchController
   end
 
   def show
-    render json: Item.find_by(search_params)
+    render json: Item.where(search_params).order(:id).first
   end
 
 private
