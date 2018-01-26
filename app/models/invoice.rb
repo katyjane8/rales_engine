@@ -8,4 +8,14 @@ class Invoice < ApplicationRecord
 
   validates_presence_of :status
 
+  def self.total_revenue
+    joins(
+      :invoice_items, :transactions
+    ).where(
+      'transactions.result': :success
+    ).sum(
+      'invoice_items.quantity * invoice_items.unit_price'
+    )
+  end
+
 end
