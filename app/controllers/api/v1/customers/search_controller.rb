@@ -1,4 +1,4 @@
-class Api::V1::Customers::SearchController < ApplicationController
+class Api::V1::Customers::SearchController < SearchController
 
   def index
     render json: Customer.where(search_params)
@@ -11,7 +11,13 @@ class Api::V1::Customers::SearchController < ApplicationController
 private
 
   def search_params
-    params.permit(Customer.attribute_names)
+    super.permit(
+      :first_name,
+      :last_name,
+      :created_at,
+      :updated_at,
+      :id
+    )
   end
 
 end

@@ -1,4 +1,4 @@
-class Api::V1::Invoices::SearchController < ApplicationController
+class Api::V1::Invoices::SearchController < SearchController
 
   def index
     render json: Invoice.where(search_params)
@@ -11,7 +11,14 @@ class Api::V1::Invoices::SearchController < ApplicationController
 private
 
   def search_params
-    params.permit(Invoice.attribute_names)
+    super.permit(
+      :customer_id,
+      :merchant_id,
+      :status,
+      :created_at,
+      :updated_at,
+      :id
+    )
   end
 
 end
