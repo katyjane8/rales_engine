@@ -9,11 +9,13 @@ class Api::V1::Merchants::RevenueController < ApplicationController
 private
 
   def search_params
+    permitted = {}
     if params[:date]
       datetime = DateTime.parse(params[:date])
-      params[:updated_at] = whole_day(datetime)
+      permitted[:updated_at] = whole_day(datetime)
     end
-    params.permit(:merchant_id, :created_at)
+    permitted[:merchant_id] = params[:merchant_id] if params[:merchant_id]
+    permitted
   end
 
   def whole_day(datetime)
