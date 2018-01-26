@@ -1,6 +1,4 @@
 require 'rails_helper'
-# GET /api/v1/items/most_items?quantity=x
- # returns the top x item instances ranked by total number sold
 
 describe "Items BI endpoints API" do
   before :each do
@@ -33,7 +31,7 @@ describe "Items BI endpoints API" do
     expect(response).to be_successful
 
     item = JSON.parse(response.body)
-    byebug
+    
     expect(item["best_day"]).to eq("2018-01-23T17:37:07.000Z")
   end
 
