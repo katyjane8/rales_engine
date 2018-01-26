@@ -1,4 +1,4 @@
-# README
+# Rales(Rails) Engine 
 Rales Engine is a Rails and ActiveRecord app that is used to build a JSON API which exposes SalesEngine data schema. This can be used for large scale data stored in CSVs for a range of e-commerce companies.
 
 ## Getting Started
