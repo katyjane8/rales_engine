@@ -7,4 +7,12 @@ class ApplicationController < ActionController::API
     }
   end
 
+  def in_cents(dollars)
+    (dollars.to_f * 100).round
+  end
+
+  def in_dollars(cents)
+    '%.2f' % (cents / 100.0)
+  end
+
 end

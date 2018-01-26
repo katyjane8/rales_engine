@@ -17,10 +17,11 @@ class Api::V1::ItemsController < ApplicationController
     item = Item.update(params[:id], item_params)
     render_id_and_errors(item)
   end
-
+  
 private
 
   def item_params
+    params[:unit_price] = in_cents(params[:unit_price])
     params.require(:item).permit(
       :merchant_id,
       :name,
